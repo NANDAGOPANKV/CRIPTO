@@ -4,7 +4,6 @@ import { CoinItems } from "./CoinItems";
 export const SearchCoin = ({ coins }) => {
   const [searchCointxt, setSearchCointxt] = useState("");
 
-  console.log(coins);
   return (
     <div className="rounded-div my-4">
       <div className="flex flex-col md:flex-row justify-between pt-4 pb-6 text-center md:text-right  ">

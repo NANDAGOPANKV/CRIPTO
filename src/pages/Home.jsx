@@ -26,7 +26,7 @@ export const Home = () => {
   }, [setCoins, url]);
   return (
     <div>
-      {coins.length === 0 ? (
+      {coins?.length === 0 ? (
         <div>
           <h2 className="flex items-center justify-center mt-[17%]">
             <RingLoader color="#05edb3" />

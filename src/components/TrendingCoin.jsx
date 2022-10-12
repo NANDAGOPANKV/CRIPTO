@@ -8,7 +8,6 @@ export const TrendingCoin = () => {
       .get("https://api.coingecko.com/api/v3/search/trending")
       .then((res) => {
         setTrendingCoin(res.data.coins);
-        console.log(res.data.coins);
       })
       .catch((err) => {
         console.log(err);

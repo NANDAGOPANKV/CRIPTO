@@ -1,20 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 // react-icons
 import { AiFillLock, AiOutlineMail } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { UserAuth } from "../context/auth/AuthContext";
 
 export const Signin = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const { SignIn } = UserAuth();
+
+  const NavigateTo = useNavigate();
+
+  const handleSubmitSignIn = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+      await SignIn(email, password);
+      NavigateTo("/account");
+    } catch (error) {
+      console.log(error.message);
+      setError(error.message);
+    }
+  };
+
   return (
     <div className="rounded-div my-8 ">
       <div className="max-w-[400px] mx-auto min-h-[600px] px-4 py-20   ">
         <h1 className="text-2xl font-bold">Sign In</h1>
         {/* form */}
-        <form>
+        {error ? <p className="bg-red-500 p-3 my-3">{error}</p> : null}
+        <form onSubmit={handleSubmitSignIn}>
           {/* email */}
           <div className="my-4">
             <label>Email</label>
             <div className="my-3 w-full relative rounded-2xl shadow-2xl  ">
               <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full p-2 bg-primary border border-input rounded-2xl  "
                 type="email"
               />
@@ -27,6 +51,8 @@ export const Signin = () => {
             <label>Password</label>
             <div className="my-3 w-full relative rounded-2xl shadow-2xl  ">
               <input
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="w-full p-2 bg-primary border border-input rounded-2xl  "
                 type="password"
               />
@@ -35,13 +61,18 @@ export const Signin = () => {
           </div>
           {/* password */}
           {/* sign in btn */}
-          <button className="w-full my-2 bg-button text-btnText rounded-2xl p-3 hover:shadow-xl shadow-2xl  ">Sign In</button>
+          <button className="w-full my-2 bg-button text-btnText rounded-2xl p-3 hover:shadow-xl shadow-2xl  ">
+            Sign In
+          </button>
           {/* sign in btn */}
         </form>
         {/* form */}
 
         <p className="my-3">
-          Dont have an account ? <Link to="/signup" className="text-accent">Sign Up</Link>
+          Dont have an account ?{" "}
+          <Link to="/signup" className="text-accent">
+            Sign Up
+          </Link>
         </p>
       </div>
     </div>

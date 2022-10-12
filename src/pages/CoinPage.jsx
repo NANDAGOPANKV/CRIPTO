@@ -32,8 +32,8 @@ export const CoinPage = () => {
     <>
       {getCoinDetails ? (
         <div className="rounded-div my-12 py-8 ">
-          CoinPage
-          <div className="flex py-8">
+         
+          <div className="flex py-8 items-center">
             <img
               className="w-32 m-8 "
               src={getCoinDetails?.image?.large}
@@ -48,7 +48,7 @@ export const CoinPage = () => {
           </div>
           <div className=" grid md:grid-cols-2 gap-8  ">
             <div>
-              <div className="flex items-center p-2 ">
+              <div className="flex items-center justify-between p-2 ">
                 {getCoinDetails.market_data?.current_price ? (
                   <p className=" text-3xl font-bold  ">
                     $

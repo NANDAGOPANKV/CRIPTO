@@ -1,15 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 // icons favor
-import { AiOutlineStar } from "react-icons/ai";
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
 // graph spark lines
 import { Sparklines, SparklinesLine } from "react-sparklines";
+// favorite thing adding
+import { db } from "../firebase/Firebase";
+import { UserAuth } from "../context/auth/AuthContext";
+import { arrayUnion, updateDoc, doc, collection, setDoc, getDoc } from "firebase/firestore";
 
 export const CoinItems = ({ items }) => {
+  const [favoriteCoins, setFavoriteCoins] = useState(false);
+  const { user } = UserAuth();
+
+  const coinPath = doc(db, "users", `${user?.email}`);
+  //saving to the db
+  const handleCoinSave = async () => {
+    if (user?.email) {
+      setFavoriteCoins(!favoriteCoins);
+      updateDoc(coinPath, {
+        FavoriteCoins: arrayUnion({
+          id: items.id,
+          name: items.name,
+          image: items.image,
+          rank: items.market_cap_rank,
+          symbol: items.symbol,
+        }),
+      });
+      
+    } else {
+      alert("Please sign in to save a coin to your favorites");
+    }
+  };
+  // const savedRef = collection(db, "users", `${user?.email}`,'FavoriteCoins');
+  // const savedCoin = getDoc(savedRef);
+
   return (
     <tr className="h-[80px] border-b overflow-hidden ">
-      <td>
-        <AiOutlineStar />
+      <td onClick={handleCoinSave}>
+        {favoriteCoins  ? <AiFillStar /> : <AiOutlineStar />}
       </td>
       <td>{items.market_cap_rank}</td>
       <td>

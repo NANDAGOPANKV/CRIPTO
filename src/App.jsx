@@ -11,26 +11,29 @@ import { Signup } from "./pages/SignUp";
 import { ThemeProvider } from "./context/theme/ThemeContext";
 import { Sample } from "./pages/Sample";
 import { Footer } from "./components/Footer";
+import { AuthContextProvider } from "./context/auth/AuthContext";
 
 export default function App() {
   return (
     <ThemeProvider>
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/account" element={<Account />} />
-        <Route path="/coin" element={<CoinPage />} />
-        <Route path="/signin" element={<Signin />} />
-        <Route path="/signup" element={<Signup />} />
-        {/* delete this  */}
-        <Route path="/sample" element={<Sample />} />
-        {/* delete this  */}
-        <Route path="/coin/:coinId" element={<CoinPage />}>
-          <Route path=":coinId" />
-        </Route>
-        <Route path="*" element={<h1>ERROR PAGE NOT FOUND</h1>} />
-      </Routes>
-      <Footer/>
+      <AuthContextProvider>
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/coin" element={<CoinPage />} />
+          <Route path="/signin" element={<Signin />} />
+          <Route path="/signup" element={<Signup />} />
+          {/* delete this  */}
+          <Route path="/sample" element={<Sample />} />
+          {/* delete this  */}
+          <Route path="/coin/:coinId" element={<CoinPage />}>
+            <Route path=":coinId" />
+          </Route>
+          <Route path="*" element={<h1>ERROR PAGE NOT FOUND</h1>} />
+        </Routes>
+        <Footer />
+      </AuthContextProvider>
     </ThemeProvider>
   );
 }

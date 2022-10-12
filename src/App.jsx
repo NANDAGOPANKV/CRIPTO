@@ -9,6 +9,8 @@ import { Signin } from "./pages/SignIn";
 import { Signup } from "./pages/SignUp";
 // themeprovider
 import { ThemeProvider } from "./context/theme/ThemeContext";
+import { Sample } from "./pages/Sample";
+import { Footer } from "./components/Footer";
 
 export default function App() {
   return (
@@ -20,11 +22,15 @@ export default function App() {
         <Route path="/coin" element={<CoinPage />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
+        {/* delete this  */}
+        <Route path="/sample" element={<Sample />} />
+        {/* delete this  */}
         <Route path="/coin/:coinId" element={<CoinPage />}>
           <Route path=":coinId" />
         </Route>
         <Route path="*" element={<h1>ERROR PAGE NOT FOUND</h1>} />
       </Routes>
+      <Footer/>
     </ThemeProvider>
   );
 }

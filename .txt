@@ -2,11 +2,12 @@
 #LAST DAY ENDED HERE DOWN BELOW#
 
 ( Search on YouTube
-videos duration : 1:53:34
+videos duration : 02:05:49
 video title : Jr Front End Web Developer Portfolio Project - Get Hired 
 )
 (
     On VSCode
-CoinPage.jsx : line Number 62
+CoinPage.jsx : line Number 197 : align
 url : http://localhost:3000/coin
 )
+
